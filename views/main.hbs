@@ -1,0 +1,70 @@
+<div class='container p-0 my-2 mx-auto'>
+
+    <div class=" mt-4 bg-light p-4 my-2 mx-auto">
+        <div class="d-flex align-items-center justify-content-between">
+            <h1 class='text-primary'>Bienvenido {{usuario}}</h1>
+            <form action="api/logout">
+                <button type="submit" class='btn btn-danger'>Log Out</button>
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <div class=' mt-4 bg-light p-4 my-2 mx-auto'>
+        <h1 class='text-primary mb-5'>Ingrese producto</h1>
+        <div class='mb-3'>
+            <label for='title' class='form-label fw-bold fst-italic'>Nombre:</label>
+            <input type='text' class='form-control' name='title' id='nombre' />
+        </div>
+        <div class='mb-3'>
+            <label for='price' class='form-label fw-bold fst-italic'>Precio:</label>
+            <input type='text' class='form-control' name='price' id='precio' />
+        </div>
+        <div class='mb-3'>
+            <label for='thumbnail' class='form-label fw-bold fst-italic'>Foto URL:</label>
+            <input type='text' class='form-control' name='thumbnail' id='fotoUrl' />
+        </div>
+
+        <button id='addProduct' class='btn btn-success mt-4'>Enviar</button>
+
+    </div>
+
+    {{!-- {{> productos}} --}}
+    <div id='tablaProductos'></div>
+
+</div>
+<div class='container bg-light p-4 my-2 mx-auto'>
+    <h1 class='text-primary'>Centro de mensajes</h1>
+    <h1 class='text-primary mb-5' id="compresionLabel"></h1>
+    <input placeholder="Ingresa tu dirección de email..." type='email' class='form-control' id='emailMessage'
+        style="max-width:300px;margin-bottom: 12px;" />
+    <input placeholder="Ingresa tu nombre..." type='text' class='form-control' id='nombreMessage'
+        style="max-width:300px;margin-bottom: 12px;" />
+    <input placeholder="Ingresa tu apellido..." type='text' class='form-control' id='apellidoMessage'
+        style="max-width:300px;margin-bottom: 12px;" />
+    <input placeholder="Ingresa tu edad..." type='text' class='form-control' id='edadMessage'
+        style="max-width:300px;margin-bottom: 12px;" />
+    <input placeholder="Ingresa tu alias..." type='text' class='form-control' id='aliasMessage'
+        style="max-width:300px;margin-bottom: 12px;" />
+    <input placeholder="Ingresa el url de tu avatar..." type='text' class='form-control' id='avatarMessage'
+        style="max-width:300px;margin-bottom: 12px;" />
+    <hr />
+
+
+
+    {{!-- {{> chat}} --}}
+    <div id='listaMensajes'></div>
+
+
+
+    <div class="d-flex justify-content-start">
+
+        <input placeholder="Envía un mensaje..." type='text' class='form-control' id='textMessage'
+            style="max-width:200px;" />
+        <button id='sendMessage' class='btn btn-success ms-3'>Enviar!</button>
+    </div>
+    <p class="fst-italic text-danger mt-2" id="alert"></p>
+
+</div>

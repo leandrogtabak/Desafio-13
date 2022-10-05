@@ -1,0 +1,162 @@
+[
+  {
+    "_id": { "$oid": "631b0923c7c45ff7ddac6646" },
+    "author": {
+      "email": "leandrogtabak@gmail.com",
+      "nombre": "Leandro",
+      "apellido": "Tabak",
+      "edad": "35",
+      "alias": "Rulo",
+      "avatar": "http://leandro",
+      "_id": { "$oid": "631b0923c7c45ff7ddac6647" }
+    },
+    "text": "Hola! Como andas?",
+    "fyh": "[09/09/2022 12:36:35]",
+    "id": 1,
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "631b094ec7c45ff7ddac664c" },
+    "author": {
+      "email": "jonathan@gmail.com",
+      "nombre": "Jonathan",
+      "apellido": "Alex",
+      "edad": "34",
+      "alias": "ElTzoni",
+      "avatar": "hhtp://choni12",
+      "_id": { "$oid": "631b094ec7c45ff7ddac664d" }
+    },
+    "text": "Todo bien, vos?",
+    "fyh": "[09/09/2022 12:37:18]",
+    "id": 2,
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "631b0959c7c45ff7ddac6651" },
+    "author": {
+      "email": "leandrogtabak@gmail.com",
+      "nombre": "Leandro",
+      "apellido": "Tabak",
+      "edad": "35",
+      "alias": "Rulo",
+      "avatar": "http://leandro",
+      "_id": { "$oid": "631b0959c7c45ff7ddac6652" }
+    },
+    "text": "Bien, aca haciendo el desafio de coder!",
+    "fyh": "[09/09/2022 12:37:29]",
+    "id": 3,
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "631b0964c7c45ff7ddac6656" },
+    "author": {
+      "email": "jonathan@gmail.com",
+      "nombre": "Jonathan",
+      "apellido": "Alex",
+      "edad": "34",
+      "alias": "ElTzoni",
+      "avatar": "hhtp://choni12",
+      "_id": { "$oid": "631b0964c7c45ff7ddac6657" }
+    },
+    "text": "y? esta facil? cuanto te falta?",
+    "fyh": "[09/09/2022 12:37:40]",
+    "id": 4,
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "631b0979c7c45ff7ddac665b" },
+    "author": {
+      "email": "leandrogtabak@gmail.com",
+      "nombre": "Leandro",
+      "apellido": "Tabak",
+      "edad": "35",
+      "alias": "Rulo",
+      "avatar": "http://leandro",
+      "_id": { "$oid": "631b0979c7c45ff7ddac665c" }
+    },
+    "text": "No tanto, ya logré hacer el chat funcional de la clase pasada, pero con los tipos de objeto nuevo",
+    "fyh": "[09/09/2022 12:38:01]",
+    "id": 5,
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "631b099bc7c45ff7ddac6660" },
+    "author": {
+      "email": "leandrogtabak@gmail.com",
+      "nombre": "Leandro",
+      "apellido": "Tabak",
+      "edad": "35",
+      "alias": "Rulo",
+      "avatar": "http://leandro",
+      "_id": { "$oid": "631b099bc7c45ff7ddac6661" }
+    },
+    "text": "Lo que me falta ahora en realidad es: que genere la logica de normalizar y desnormalizar para las vistas entre front y back y mostrar el porcentaje de compresion",
+    "fyh": "[09/09/2022 12:38:35]",
+    "id": 6,
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "631b09c5c7c45ff7ddac6665" },
+    "author": {
+      "email": "leandrogtabak@gmail.com",
+      "nombre": "Leandro",
+      "apellido": "Tabak",
+      "edad": "35",
+      "alias": "Rulo",
+      "avatar": "http://leandro",
+      "_id": { "$oid": "631b09c5c7c45ff7ddac6666" }
+    },
+    "text": "Ademas, que ande con firebase y con el fs y que me pregunte cual quiero usar de esos en las funciones que interactuan",
+    "fyh": "[09/09/2022 12:39:17]",
+    "id": 7,
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "631b09d7c7c45ff7ddac666a" },
+    "author": {
+      "email": "jonathan@gmail.com",
+      "nombre": "Jonathan",
+      "apellido": "Alex",
+      "edad": "34",
+      "alias": "ElTzoni",
+      "avatar": "hhtp://choni12",
+      "_id": { "$oid": "631b09d7c7c45ff7ddac666b" }
+    },
+    "text": "Ahh, buenisimo. Seguro durante el viernes lo ternminas bien!",
+    "fyh": "[09/09/2022 12:39:35]",
+    "id": 8,
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "631b09e0c7c45ff7ddac666f" },
+    "author": {
+      "email": "leandrogtabak@gmail.com",
+      "nombre": "Leandro",
+      "apellido": "Tabak",
+      "edad": "35",
+      "alias": "Rulo",
+      "avatar": "http://leandro",
+      "_id": { "$oid": "631b09e0c7c45ff7ddac6670" }
+    },
+    "text": "Espero que si! Gracias che, abrazo!",
+    "fyh": "[09/09/2022 12:39:44]",
+    "id": 9,
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "631b09ecc7c45ff7ddac6674" },
+    "author": {
+      "email": "jonathan@gmail.com",
+      "nombre": "Jonathan",
+      "apellido": "Alex",
+      "edad": "34",
+      "alias": "ElTzoni",
+      "avatar": "hhtp://choni12",
+      "_id": { "$oid": "631b09ecc7c45ff7ddac6675" }
+    },
+    "text": "Abrazoo, nos vemo",
+    "fyh": "[09/09/2022 12:39:55]",
+    "id": 10,
+    "__v": 0
+  }
+]
