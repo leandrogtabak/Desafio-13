@@ -1,0 +1,17 @@
+<div id="contenedor" class="my-2">
+    <div class='container d-flex flex-column justify-content-center align-items-center bg-danger py-5'>
+        <h1 class='text-white mb-4'>USER ERROR SINGUP</h1>
+        <button type="button" class='btn btn-warning mt-2' style="width:fit-content;" onclick="volver()">VOLVER</button>
+    </div>
+</div>
+
+<script>
+    function redireccionar(pagina) {
+        window.location.assign(pagina);
+    }
+
+    function volver() {
+        console.log('volver');
+        redireccionar('/register')
+    }
+</script>

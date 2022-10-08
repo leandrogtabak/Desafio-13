@@ -1,18 +1,18 @@
 <div id="contenedor">
     <div class='container bg-light p-4 my-2 mx-auto'>
-        <h1 class='text-primary mb-4'>Login de Usuario</h1>
-        <form action='/login' method='post'>
+        <h1 class='text-primary mb-4'>Registro de Usuario</h1>
+        <form action='/register' method='post'>
             <input name="username" placeholder="Ingresa tu usuario (email)..." type='email' class='form-control'
                 style="max-width:300px;margin-bottom: 12px;" required />
             <input name="password" placeholder="Ingresa tu password..." type='password' class='form-control'
                 style="max-width:300px;margin-bottom: 12px;" required />
             <div class="d-flex flex-column">
-                <button id='login' type="submit" class='btn btn-success mt-2' style="width:fit-content;">Login</button>
-                <button id='toRegister' type="button" class='btn btn-success mt-2' style="width:fit-content;">Ir a
-                    Register</button>
+                <button id='register' type="submit" class='btn btn-success mt-2'
+                    style="width:fit-content;">Register</button>
+                <button id='toLogin' type="button" class='btn btn-success mt-2' style="width:fit-content;">Ir a
+                    Login</button>
             </div>
 
         </form>
     </div>
-
 </div>

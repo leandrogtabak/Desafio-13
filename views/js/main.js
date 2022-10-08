@@ -1,5 +1,10 @@
 const socket = io.connect();
 
+window.addEventListener('load', (e) => {
+  e.preventDefault();
+  socket.emit('onload');
+});
+
 /* Seleccion de elementos HTML */
 const inputEmailMessage = document.querySelector('#emailMessage');
 const inputNombreMessage = document.querySelector('#nombreMessage');
@@ -15,11 +20,20 @@ const inputPrecio = document.querySelector('#precio');
 const inputFotoUrl = document.querySelector('#fotoUrl');
 
 const btnSendProduct = document.querySelector('#addProduct');
-btnSendProduct.addEventListener('click', sendProduct);
+btnSendProduct?.addEventListener('click', sendProduct);
 
 const btnSendMessage = document.querySelector('#sendMessage');
+btnSendMessage?.addEventListener('click', sendMessage);
 
-btnSendMessage.addEventListener('click', sendMessage);
+const btnToRegister = document.querySelector('#toRegister');
+btnToRegister?.addEventListener('click', () => redirectTo('/register'));
+
+const btnToLogin = document.querySelector('#toLogin');
+btnToLogin?.addEventListener('click', () => redirectTo('/login'));
+
+function redirectTo(route) {
+  window.location.assign(route);
+}
 
 function validateEmail(mail) {
   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {

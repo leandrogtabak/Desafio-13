@@ -2,24 +2,28 @@ import express from 'express';
 import { faker } from '@faker-js/faker/locale/es';
 import { Server as HttpServer } from 'http';
 import { Server as IOServer } from 'socket.io';
-import { urlJson, urlDb, urlMongo } from './DB/config.js';
+import { URL_BASE_DE_DATOS, TIEMPO_EXPIRACION } from './DB/config.js';
 import { ContenedorMongoDb } from './contenedores/ContenedorMongoDb.js';
 import { ContenedorFirebase } from './contenedores/ContenedorFirebase.js';
 import { ContenedorArchivo } from './contenedores/ContenedorArchivo.js';
 import { Mensaje } from './models/mensaje.js';
+import { User } from './models/User.js';
+import { conectarDB } from './controllersdb.js';
 import handlebars from 'express-handlebars';
 import util from 'util';
 import moment from 'moment';
-import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const bCrypt = require('bcrypt');
+import router from './routes/router.js';
+
 import path from 'path';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-import MongoStore from 'connect-mongo';
-import router from './routes/router.js';
-
-const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 
 const app = express();
 const httpServer = new HttpServer(app);
@@ -27,31 +31,112 @@ const io = new IOServer(httpServer);
 
 app.use(express.static(path.resolve(__dirname, './views')));
 
-const PORT = 8080;
-httpServer.listen(PORT, function () {
-  console.log(`Servidor corriendo en ${PORT}`);
+passport.use(
+  'signup',
+  new LocalStrategy(
+    {
+      passReqToCallback: true,
+    },
+    async (req, username, password, done) => {
+      let user;
+      try {
+        user = await User.findOne({ username: username });
+      } catch (error) {
+        console.log('Error in SignUp: ' + err);
+        return done(err);
+      }
+
+      if (user) {
+        console.log('User already exists');
+        return done(null, false);
+      }
+
+      const newUser = {
+        username: username,
+        password: await createHash(password),
+      };
+
+      let userWithId;
+      try {
+        userWithId = await User.create(newUser);
+      } catch (error) {
+        console.log('Error in Saving user: ' + err);
+        return done(err);
+      }
+
+      console.log(user);
+      console.log('User Registration succesful');
+      return done(null, userWithId);
+    }
+  )
+);
+
+passport.use(
+  'login',
+  new LocalStrategy(async (username, password, done) => {
+    let user;
+    try {
+      user = await User.findOne({ username });
+    } catch (error) {
+      return done(err);
+    }
+
+    if (!user) {
+      console.log('User Not Found with username ' + username);
+      return done(null, false);
+    }
+
+    if (!(await isValidPassword(user, password))) {
+      console.log('Invalid Password');
+      return done(null, false);
+    }
+
+    return done(null, user);
+  })
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user._id);
 });
+
+passport.deserializeUser((id, done) => {
+  User.findById(id, done);
+});
+
+async function createHash(password) {
+  const salt = await bCrypt.genSalt(10);
+  return await bCrypt.hash(password, salt);
+}
+
+async function isValidPassword(user, password) {
+  return await bCrypt.compare(password, user.password);
+}
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cookieParser());
-// Session Setup
 app.use(
   session({
-    store: MongoStore.create({
-      mongoUrl: 'mongodb+srv://newuser:tfDLXnPCGy4RCE97@cluster0.wc4ea7z.mongodb.net/test',
-      mongoOptions: advancedOptions,
-    }),
     secret: 'Is this the real life? Is this just fantasy?',
-    resave: false,
-    saveUninitialized: false,
     cookie: {
+      httpOnly: false,
+      secure: false,
       expires: 60000,
-      maxAge: 600000,
+      maxAge: TIEMPO_EXPIRACION,
     },
+    rolling: true,
+    resave: true,
+    saveUninitialized: false,
   })
 );
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+const PORT = 8080;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // const miContenedorMongoDB = new ContenedorMongoDb(urlMongo, Mensaje);   //probar mongo descomentando esto y usand en las funciones de abajo, a este contenedor
 // const miContenedorFirebase = new ContenedorFirebase(urlJson, urlDb, 'ecommerce'); //probar firebase descomentando esto y usand en las funciones de abajo, a este contenedor
@@ -73,16 +158,20 @@ app.set('view engine', 'hbs');
 // establecemos directorio donde se encuentran los archivos de plantilla
 app.set('views', './views');
 
-/* Utilizo router */
-
+// ------------------------------------------------------------------------------
+//  ROUTER
+// ------------------------------------------------------------------------------
 app.use('/', router);
 
 io.on('connection', async (socket) => {
   console.log('Un cliente se ha conectado');
-  const productos = await miContenedorProductos.getAll();
-  const mensajes = await miContenedorMensajes.getAll();
-  io.sockets.emit('productos', productos);
-  io.sockets.emit('mensajes', mensajes);
+
+  socket.on('onload', async () => {
+    const productos = await miContenedorProductos.getAll();
+    const mensajes = await miContenedorMensajes.getAll();
+    io.sockets.emit('productos', productos);
+    io.sockets.emit('mensajes', mensajes);
+  });
 
   socket.on('new-message', async (newMessage) => {
     await miContenedorMensajes.save(newMessage);
@@ -93,6 +182,18 @@ io.on('connection', async (socket) => {
     await miContenedorProductos.save(newProduct);
     const productos = await miContenedorProductos.getAll();
     io.sockets.emit('productos', productos);
+  });
+});
+
+// ------------------------------------------------------------------------------
+//  LISTEN SERVER
+// ------------------------------------------------------------------------------
+conectarDB(URL_BASE_DE_DATOS, (err) => {
+  if (err) return console.log('error en conexión de base de datos', err);
+  console.log('BASE DE DATOS CONECTADA');
+
+  httpServer.listen(PORT, function () {
+    console.log(`Servidor corriendo en ${PORT}`);
   });
 });
 

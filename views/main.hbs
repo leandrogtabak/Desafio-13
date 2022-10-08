@@ -3,7 +3,7 @@
     <div class=" mt-4 bg-light p-4 my-2 mx-auto">
         <div class="d-flex align-items-center justify-content-between">
             <h1 class='text-primary'>Bienvenido {{usuario}}</h1>
-            <form action="api/logout">
+            <form action="/logout">
                 <button type="submit" class='btn btn-danger'>Log Out</button>
             </form>
 
@@ -31,7 +31,6 @@
 
     </div>
 
-    {{!-- {{> productos}} --}}
     <div id='tablaProductos'></div>
 
 </div>
@@ -52,12 +51,7 @@
         style="max-width:300px;margin-bottom: 12px;" />
     <hr />
 
-
-
-    {{!-- {{> chat}} --}}
     <div id='listaMensajes'></div>
-
-
 
     <div class="d-flex justify-content-start">
 
